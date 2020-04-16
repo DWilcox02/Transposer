@@ -37,26 +37,31 @@ public class Runner
 		
 		while(!note.equals("stop"))
 		{
+			if(!note.substring(note.length() - 1).equals(" "))
+			{
+				note += " ";
+			}
 			int changing = 1;
 			String total = "";
 			for(int i = 0; i < note.length(); i += changing)
 			{
 				String temp = "";
-				
+				changing = 1;
 				innerloop:
 				for(int j = i; j < note.length(); j++)
 				{
 					String character = note.substring(j, j+1);
 					if(character.equals(" "))
 					{
+						total += transposeNote(currentInstKey, nextInstKey, temp).toString();
 						total += " ";
 						break innerloop;
 					}
 					temp += character;
 					changing++;
 				}
-				total += transposeNote(currentInstKey, nextInstKey, temp).toString();
 			}
+			System.out.println(total);
 			note = input.nextLine();
 		}
 	}
@@ -64,7 +69,6 @@ public class Runner
 	public Note transposeNote(Key current, Key next, String note)
 	{
 		Note newNote = poser.transpose(current, next, Note.stringToNote(note));
-		System.out.println(newNote.toString());
 		return newNote;
 	}
 }
