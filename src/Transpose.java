@@ -34,15 +34,24 @@ public class Transpose
 				currentKey = newKey;
 			}
 		}
+		
+//		for(int i = 0; i < circleOfFifths.size(); i++)
+//		{
+//			System.out.println(circleOfFifths.get(i).toString());
+//		}
 	}
 	
 	public Note transpose(Key current, Key next, Note note)
 	{
 		int firstIndex = next.indexOfString(note.getName());
-		Note newNote = current.getNote(firstIndex);
-		if(note.getValue() != next.getNote(firstIndex).getValue())
+		Note newNote = new Note(current.getNote(firstIndex).getName(), current.getNote(firstIndex).getValue());
+		int value1 = note.getValue();
+		Note note2 = next.getNote(firstIndex);
+		int value2 = note2.getValue();
+		if(value1 != value2)
 		{
-			newNote.incValue(note.getValue());
+			int diff = value1 - value2;
+			newNote.incValue(diff);
 		}
 		return newNote;
 	}
